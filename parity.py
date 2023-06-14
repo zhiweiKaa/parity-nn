@@ -33,7 +33,7 @@ def get_args():
     parser.add_argument('--n', default=40, type=int, help='string dimension')
     parser.add_argument('--k', default=3, type=int, help='parity dimension')
     parser.add_argument('--N', default=1000, type=int, help='number of training samples')
-    parser.add_argument('--B', default=32, type=int, help='batch size')
+    parser.add_argument('--B', default=1000, type=int, help='batch size')
     parser.add_argument('--epochs', default=300, type=int, help='number of epochs')
     parser.add_argument('--lr', default=0.1, type=float, help='learning rate')
     parser.add_argument('--weight-decay', default=0.01, type=float, help='value of weight decay')
