@@ -34,7 +34,7 @@ def get_args():
     parser.add_argument('--k', default=3, type=int, help='parity dimension')
     parser.add_argument('--N', default=100, type=int, help='number of training samples')
     parser.add_argument('--B', default=100, type=int, help='batch size')
-    parser.add_argument('--epochs', default=3000, type=int, help='number of epochs')
+    parser.add_argument('--epochs', default=300000, type=int, help='number of epochs')
     parser.add_argument('--lr', default=0.1, type=float, help='learning rate')
     parser.add_argument('--weight-decay', default=0.01, type=float, help='value of weight decay')
     parser.add_argument('--width', default=1000, type=int, help='width of network')
