@@ -38,7 +38,7 @@ def get_args():
     parser.add_argument('--lr', default=0.1, type=float, help='learning rate')
     parser.add_argument('--weight-decay', default=0.01, type=float, help='value of weight decay')
     parser.add_argument('--width', default=1000, type=int, help='width of network')
-    parser.add_argument('--n_seeds', default=3, type=int, help='number of random seeds')
+    parser.add_argument('--n_seeds', default=2, type=int, help='number of random seeds')
     parser.add_argument('--train', action='store_true', help='train models')
     parser.add_argument('--ind-norms', action='store_true', help='plot individual neurons norm')
     parser.add_argument('--global-sparsity', action='store_true', help='compute and plot global sparsity of network over time')
