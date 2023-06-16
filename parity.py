@@ -184,7 +184,14 @@ def main():
         Ne1 = list(model.parameters())[1].detach().cpu().numpy()
         plt.hist(Ne1, bins=50)
         plt.title('Neuron distribution')
-        plt.savefig(os.path.join(fig_path, 'neuron1.pdf'))
+        plt.savefig(os.path.join(fig_path, 'neuron.pdf'))
+        plt.close()
+        
+        Ne1 = Ne1[np.abs(Ne1) > 0.001]
+        #Ne0 = list(model.parameters())[0].detach().cpu().numpy()
+        plt.hist(Ne1, bins=200, range=[-0.1, 0.1])
+        plt.title('Neuron distribution')
+        plt.savefig(os.path.join(fig_path, 'neuron_local.pdf'))
         plt.close()
 
     else:
