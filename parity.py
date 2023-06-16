@@ -179,6 +179,13 @@ def main():
         plt.legend()
         plt.savefig(os.path.join(fig_path, 'acc.pdf'))
         plt.close()
+        
+        #draw histgram of the neurons of the last layer
+        Ne1 = list(model.parameters())[1].detach().cpu().numpy()
+        plt.hist(Ne1, bins=50)
+        plt.title('Neuron distribution')
+        plt.savefig(os.path.join(fig_path, 'neuron1.pdf'))
+        plt.close()
 
     else:
         with open(os.path.join(base_dir, 'normss'), "rb") as fp:
