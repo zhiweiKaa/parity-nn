@@ -158,42 +158,40 @@ def main():
         np.save(os.path.join(base_dir, 'mean_test_acc'), m4)
         np.save(os.path.join(base_dir, 'std_test_acc'), std4)
 
-        plt.plot(m1, linestyle='-', label='train')
-        plt.plot(m2, linestyle='-', label='test')
-        plt.fill_between([i for i in range(args.epochs)], m1 - std1, m1 + std1, alpha = 0.3)
-        plt.fill_between([i for i in range(args.epochs)], m2 - std2, m2 + std2, alpha = 0.3)
-        plt.title('Loss')
-        plt.xlabel('epochs')
-        plt.xscale('log')
-        plt.legend()
-        plt.savefig(os.path.join(fig_path, 'loss.pdf'))
-        plt.close()
+        fig, axs = plt.subplots(2, 2, figsize=(15, 15))  # Creating 4 subplots in one column
 
-        plt.plot(m3, linestyle='-', label='train')
-        plt.plot(m4, linestyle='-', label='test')
-        plt.fill_between([i for i in range(args.epochs)], m3 - std3, m3 + std3, alpha = 0.3)
-        plt.fill_between([i for i in range(args.epochs)], m4 - std4, m4 + std4, alpha = 0.3)
-        plt.title('Accuracy')
-        plt.xlabel('epochs')
-        plt.xscale('log')
-        plt.legend()
-        plt.savefig(os.path.join(fig_path, 'acc.pdf'))
-        plt.close()
-        
-        #draw histgram of the neurons of the last layer
+        # Loss plot
+        axs[0,0].plot(m1, linestyle='-', label='train')
+        axs[0,0].plot(m2, linestyle='-', label='test')
+        axs[0,0].fill_between([i for i in range(args.epochs)], m1 - std1, m1 + std1, alpha=0.3)
+        axs[0,0].fill_between([i for i in range(args.epochs)], m2 - std2, m2 + std2, alpha=0.3)
+        axs[0,0].set_title('Loss')
+        axs[0,0].set_xlabel('epochs')
+        axs[0,0].set_xscale('log')
+        axs[0,0].legend()
+        # Accuracy plot
+        axs[0,1].plot(m3, linestyle='-', label='train')
+        axs[0,1].plot(m4, linestyle='-', label='test')
+        axs[0,1].fill_between([i for i in range(args.epochs)], m3 - std3, m3 + std3, alpha=0.3)
+        axs[0,1].fill_between([i for i in range(args.epochs)], m4 - std4, m4 + std4, alpha=0.3)
+        axs[0,1].set_title('Accuracy')
+        axs[0,1].set_xlabel('epochs')
+        axs[0,1].set_xscale('log')
+        axs[0,1].legend()
+        # Neuron distribution histogram
         Ne1 = list(model.parameters())[1].detach().cpu().numpy()
-        plt.hist(Ne1, bins=50)
-        plt.title('Neuron distribution')
-        plt.savefig(os.path.join(fig_path, 'neuron.pdf'))
+        axs[1,0].hist(Ne1, bins=200)
+        axs[1,0].set_title('Neuron distribution')
+        # Neuron distribution histogram without "zero"
+        Ne1 = Ne1[np.abs(Ne1) > 0.0001]
+        axs[1,1].hist(Ne1, bins=100, range=[-0.1, 0.1])
+        axs[1,1].set_title('Neuron dist. (w/o zero)')
+        # Adjust layout for better viewing
+        plt.tight_layout()
+        # Save the figure
+        plt.savefig(os.path.join(fig_path, 'combined.pdf'))
         plt.close()
         
-        Ne1 = Ne1[np.abs(Ne1) > 0.001]
-        #Ne0 = list(model.parameters())[0].detach().cpu().numpy()
-        plt.hist(Ne1, bins=200, range=[-0.1, 0.1])
-        plt.title('Neuron distribution')
-        plt.savefig(os.path.join(fig_path, 'neuron_local.pdf'))
-        plt.close()
-
     else:
         with open(os.path.join(base_dir, 'normss'), "rb") as fp:
             normss = pickle.load(fp)
