@@ -30,10 +30,10 @@ def data_preparation(args, seed_id=42, test_samples=100, test_batchsize=100, ret
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--n', default=20, type=int, help='string dimension')
-    parser.add_argument('--k', default=3, type=int, help='parity dimension')
-    parser.add_argument('--N', default=400, type=int, help='number of training samples')
-    parser.add_argument('--B', default=400, type=int, help='batch size')
+    parser.add_argument('--n', default=30, type=int, help='string dimension')
+    parser.add_argument('--k', default=2, type=int, help='parity dimension')
+    parser.add_argument('--N', default=100, type=int, help='number of training samples')
+    parser.add_argument('--B', default=100, type=int, help='batch size')
     parser.add_argument('--epochs', default=10000, type=int, help='number of epochs')
     parser.add_argument('--lr', default=0.1, type=float, help='learning rate')
     parser.add_argument('--weight-decay', default=0.01, type=float, help='value of weight decay')
